@@ -1,12 +1,10 @@
 package com.enigma.api.inventory.controllers;
 
 import com.enigma.api.inventory.entities.Item;
-import com.enigma.api.inventory.entities.Unit;
 import com.enigma.api.inventory.exceptions.EntityNotFoundException;
 import com.enigma.api.inventory.models.*;
 import com.enigma.api.inventory.services.FileService;
 import com.enigma.api.inventory.services.ItemService;
-import com.enigma.api.inventory.services.UnitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,9 +33,6 @@ public class ItemController {
     private ItemService service;
 
     @Autowired
-    private UnitService unitService;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -52,10 +47,6 @@ public class ItemController {
     @PostMapping
     public ResponseMessage<ItemResponse> add(@RequestBody @Valid ItemRequest model) {
         Item entity = modelMapper.map(model, Item.class);
-
-        Unit unit = unitService.findById(model.getUnitId());
-        entity.setUnit(unit);
-
         entity = service.save(entity);
         ItemResponse data = modelMapper.map(entity, ItemResponse.class);
         return ResponseMessage.success(data);
@@ -67,10 +58,6 @@ public class ItemController {
         if (entity == null) {
             throw new EntityNotFoundException();
         }
-
-        Unit unit = unitService.findById(model.getUnitId());
-        entity.setUnit(unit);
-
         modelMapper.map(model, entity);
         service.save(entity);
 

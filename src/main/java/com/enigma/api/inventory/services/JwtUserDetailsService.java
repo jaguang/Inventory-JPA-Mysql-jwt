@@ -1,8 +1,8 @@
 package com.enigma.api.inventory.services;
 
-import com.enigma.api.inventory.entities.DAOUser;
-import com.enigma.api.inventory.models.UserDTO;
-import com.enigma.api.inventory.repositories.UserDao;
+import com.enigma.api.inventory.entities.AmindUser;
+import com.enigma.api.inventory.models.AdminUserModel;
+import com.enigma.api.inventory.repositories.AdminUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,14 +17,14 @@ import java.util.ArrayList;
 public class JwtUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-	private UserDao userDao;
+	private AdminUserRepository adminUserRepository;
 
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		DAOUser user = userDao.findByUsername(username);
+		AmindUser user = adminUserRepository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
@@ -32,10 +32,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 				new ArrayList<>());
 	}
 	
-	public DAOUser save(UserDTO user) {
-		DAOUser newUser = new DAOUser();
+	public AmindUser save(AdminUserModel user) {
+		AmindUser newUser = new AmindUser();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return userDao.save(newUser);
+		return adminUserRepository.save(newUser);
 	}
 }

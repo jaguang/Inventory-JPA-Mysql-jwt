@@ -1,10 +1,13 @@
 package com.enigma.api.inventory.models;
 
-public class ItemResponse {
+
+public class CustomerResponse {
 
     private Integer id;
+
     private String name;
-    private Integer price;
+
+    private String alamat;
 
     public Integer getId() {
         return id;
@@ -22,12 +25,11 @@ public class ItemResponse {
         this.name = name;
     }
 
-    public Integer getPrice() {
-        return price;
+    public String getAlamat() {
+        return alamat;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
     }
-
 }

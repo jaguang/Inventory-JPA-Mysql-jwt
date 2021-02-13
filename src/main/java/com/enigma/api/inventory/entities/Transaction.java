@@ -10,8 +10,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
@@ -19,7 +20,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "stock_id")
-    private Stock stockId;
+    private Quantity quantityId;
 
     public Integer getId() {
         return id;
@@ -29,12 +30,12 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Customer getCustomerId() {
+        return customerId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
     public Item getItemId() {
@@ -45,21 +46,21 @@ public class Transaction {
         this.itemId = itemId;
     }
 
-    public Stock getStockId() {
-        return stockId;
+    public Quantity getStockId() {
+        return quantityId;
     }
 
-    public void setStockId(Stock stockId) {
-        this.stockId = stockId;
+    public void setStockId(Quantity quantityId) {
+        this.quantityId = quantityId;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", customerId=" + customerId +
                 ", itemId=" + itemId +
-                ", stockId=" + stockId +
+                ", stockId=" + quantityId +
                 '}';
     }
 }

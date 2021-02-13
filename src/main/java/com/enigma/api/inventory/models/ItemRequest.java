@@ -11,9 +11,6 @@ public class ItemRequest {
     @NotNull
     private Integer price;
 
-    @NotNull
-    private Integer unitId;
-
     public String getName() {
         return name;
     }
@@ -28,13 +25,5 @@ public class ItemRequest {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Integer getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(Integer unitId) {
-        this.unitId = unitId;
     }
 }

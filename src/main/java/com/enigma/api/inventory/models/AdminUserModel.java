@@ -1,6 +1,6 @@
 package com.enigma.api.inventory.models;
 
-public class UserDTO {
+public class AdminUserModel {
 	private String username;
 	private String password;
 

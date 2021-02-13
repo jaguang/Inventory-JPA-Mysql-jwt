@@ -20,10 +20,6 @@ public class Item extends AbstractEntity<Integer> {
     @Column(nullable = true)
     private String image;
 
-    @ManyToOne
-    @JoinColumn(name = "unit_id", nullable = false)
-    private Unit unit;
-
     public String getImage() {
         return image;
     }
@@ -56,25 +52,17 @@ public class Item extends AbstractEntity<Integer> {
         this.price = price;
     }
 
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(price, item.price) && Objects.equals(unit, item.unit);
+        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(price, item.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, unit);
+        return Objects.hash(id, name, price);
     }
 
     @Override
@@ -83,7 +71,7 @@ public class Item extends AbstractEntity<Integer> {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", unit=" + unit +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

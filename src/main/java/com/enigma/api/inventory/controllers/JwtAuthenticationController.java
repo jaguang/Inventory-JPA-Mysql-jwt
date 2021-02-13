@@ -3,7 +3,7 @@ package com.enigma.api.inventory.controllers;
 import com.enigma.api.inventory.configs.JwtTokenUtil;
 import com.enigma.api.inventory.models.JwtRequest;
 import com.enigma.api.inventory.models.JwtResponse;
-import com.enigma.api.inventory.models.UserDTO;
+import com.enigma.api.inventory.models.AdminUserModel;
 import com.enigma.api.inventory.services.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +42,7 @@ public class JwtAuthenticationController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+	public ResponseEntity<?> saveUser(@RequestBody AdminUserModel user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
